@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    background: #fafafa;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.top-controls {
+    margin-bottom: 10px;
+}
+
+.top-controls>* {
+    margin-right: 10px;
+}
+
+#sidebar {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.canvas-wrapper {
+    margin-top: 10px;
+    position: relative;
+}
+
+#tooltip {
+    transition: opacity 0.1s ease;
+}
