@@ -1,53 +1,530 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Graphics Algorithms Simulator</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Graphics Algorithms Simulator</title>
-    <link rel="stylesheet" href="css/style.css" />
-</head>
+	<body>
+		<div class="container">
+			<header>
+				<div class="title">Graphics Algorithms Simulator</div>
+				<div class="title-description">
+					Visualize and understand computer graphics algorithms step by step
+				</div>
+			</header>
+			<div class="top-controls">
+				<div class="label">Controls</div>
+				<div class="controls-body">
+					<div class="controls-body-common">
+						<label class="control-labels">Algorithm</label>
+						<div id="algorithm">
+							<div class="selector">
+								<div class="current-algo">DDA Line</div>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 27"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="0.5"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="lucide lucide-chevron-down size-4 opacity-50"
+									aria-hidden="true"
+								>
+									<path d="m6 9 6 6 6-6"></path>
+								</svg>
+							</div>
+							<ul class="algo-options">
+								<li class="algo-option" data-value="dda">
+									<span>DDA Line</span>
+									<svg
+										fill="#505050"
+										height="11"
+										viewBox="0 0 1920 1920"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+										<g
+											id="SVGRepo_tracerCarrier"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										></g>
+										<g id="SVGRepo_iconCarrier">
+											<path
+												d="M1827.701 303.065 698.835 1431.801 92.299 825.266 0 917.564 698.835 1616.4 1919.869 395.234z"
+												fill-rule="evenodd"
+											></path>
+										</g>
+									</svg>
+								</li>
+								<li class="algo-option" data-value="bresenham">
+									<span>Bresenham Line</span>
+									<svg
+										visibility="hidden"
+										fill="#505050"
+										height="11"
+										viewBox="0 0 1920 1920"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+										<g
+											id="SVGRepo_tracerCarrier"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										></g>
+										<g id="SVGRepo_iconCarrier">
+											<path
+												d="M1827.701 303.065 698.835 1431.801 92.299 825.266 0 917.564 698.835 1616.4 1919.869 395.234z"
+												fill-rule="evenodd"
+											></path>
+										</g>
+									</svg>
+								</li>
+								<li class="algo-option" data-value="circle">
+									<span>Midpoint Circle</span>
+									<svg
+										visibility="hidden"
+										fill="#505050"
+										height="11"
+										viewBox="0 0 1920 1920"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+										<g
+											id="SVGRepo_tracerCarrier"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										></g>
+										<g id="SVGRepo_iconCarrier">
+											<path
+												d="M1827.701 303.065 698.835 1431.801 92.299 825.266 0 917.564 698.835 1616.4 1919.869 395.234z"
+												fill-rule="evenodd"
+											></path>
+										</g>
+									</svg>
+								</li>
+								<li class="algo-option" data-value="ellipse">
+									<span>Midpoint Ellipse</span>
+									<svg
+										visibility="hidden"
+										fill="#505050"
+										height="11"
+										viewBox="0 0 1920 1920"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+										<g
+											id="SVGRepo_tracerCarrier"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										></g>
+										<g id="SVGRepo_iconCarrier">
+											<path
+												d="M1827.701 303.065 698.835 1431.801 92.299 825.266 0 917.564 698.835 1616.4 1919.869 395.234z"
+												fill-rule="evenodd"
+											></path>
+										</g>
+									</svg>
+								</li>
+							</ul>
+						</div>
+					</div>
 
-<body>
+					<div class="controls-body-common">
+						<label class="control-labels">Playback</label>
+						<div class="seek-controls">
+							<button class="seek-control-children" id="prevBtn">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="lucide lucide-skip-back w-4 h-4"
+									aria-hidden="true"
+								>
+									<polygon points="19 20 9 12 19 4 19 20"></polygon>
+									<line x1="5" x2="5" y1="19" y2="5"></line>
+								</svg>
+							</button>
+							<button
+								class="seek-control-children"
+								style="position: relative; transition: all 0.2s ease-in-out"
+								id="playPauseBtn"
+							>
+								<div
+									style="
+										border-radius: 0.7rem;
+										height: 100%;
+										width: 100%;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										transition: all 0.2s ease;
+									"
+									id="playBtn"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="lucide lucide-pause w-4 h-4"
+										aria-hidden="true"
+									>
+										<rect x="14" y="4" width="4" height="16" rx="1"></rect>
+										<rect x="6" y="4" width="4" height="16" rx="1"></rect>
+									</svg>
+								</div>
+								<div
+									style="
+										position: absolute;
+										top: 55%;
+										left: 50%;
+										transform: translate(-50%, -50%);
+										z-index: -1;
+										opacity: 0;
+										transition: all 0.2s ease;
+									"
+									id="pauseBtn"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										color="white"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="lucide lucide-play w-4 h-4"
+										aria-hidden="true"
+										transition="all 0.3s ease"
+									>
+										<polygon points="6 3 20 12 6 21 6 3"></polygon>
+									</svg>
+								</div>
+							</button>
+							<button class="seek-control-children" id="nextBtn">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="lucide lucide-skip-forward w-4 h-4"
+									aria-hidden="true"
+								>
+									<polygon points="5 4 15 12 5 20 5 4"></polygon>
+									<line x1="19" x2="19" y1="5" y2="19"></line>
+								</svg>
+							</button>
+							<button class="seek-control-children" id="resetBtn">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									class="lucide lucide-rotate-ccw w-4 h-4"
+									aria-hidden="true"
+								>
+									<path
+										d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+									></path>
+									<path d="M3 3v5h5"></path>
+								</svg>
+							</button>
+						</div>
+					</div>
 
-    <div class="container">
-        <h1>Graphics Algorithms Simulator</h1>
+					<div class="controls-body-common">
+						<label class="control-labels"
+							>Speed: <span id="speedRange">200</span>ms
+						</label>
 
-        <div class="top-controls">
-            <label for="algorithm">Algorithm: </label>
-            <select id="algorithm">
-                <option value="dda">DDA Line</option>
-                <option value="bresenham">Bresenham Line</option>
-                <option value="circle">Midpoint Circle</option>
-                <option value="ellipse">Midpoint Ellipse</option>
-            </select>
+						<div class="speed-control">
+							<div style="display: flex; gap: 0.5rem">
+								<button class="manipulate-value" id="speedDecrease">-</button
+								><button class="manipulate-value" id="speedIncrease">+</button>
+							</div>
+						</div>
+					</div>
+					<div class="controls-body-common">
+						<label class="control-labels"
+							>Cell Size: <span id="cellSize">40</span>px</label
+						>
+						<div style="display: flex; gap: 0.5rem">
+							<button class="manipulate-value" id="cellDecrease">-</button
+							><button class="manipulate-value" id="cellIncrease">+</button>
+						</div>
+					</div>
+				</div>
+				<div class="step-counter">
+					<label
+						>Step <span id="current-step">0</span> of
+						<span id="final-step">0</span></label
+					>
+					<div id="progress-bar">
+						<div id="progress-fill"></div>
+					</div>
+				</div>
+			</div>
+			<div
+				id="tooltip"
+				style="
+					position: absolute;
+					z-index: 1000;
+					background: #eee;
+					padding: 4px;
+					border: 1px solid #999;
+					border-radius: 4px;
+					width: max-content;
+					height: max-content;
+					font-size: 12px;
+					display: none;
+				"
+			></div>
+			<div class="canvas-wrapper">
+				<div>Visualization</div>
+				<canvas id="canvas"></canvas>
+			</div>
 
-            <button id="playBtn">Play</button>
-            <button id="pauseBtn">Pause</button>
-            <button id="prevBtn">Prev Step</button>
-            <button id="nextBtn">Next Step</button>
-            <button id="resetBtn">Reset</button>
+			<div class="card">
+				<div class="card-header">
+					<div class="card-title">Algorithm Information</div>
+				</div>
+				<div class="card-content">
+					<div class="content-block">
+						<h3 class="font-semibold">DDA Line Algorithm</h3>
+						<p>
+							Uses incremental calculation to draw lines by calculating
+							intermediate points along the line path using floating-point
+							arithmetic.
+						</p>
+					</div>
+					<div class="content-block">
+						<h4 class="font-medium">Pseudocode:</h4>
+						<div class="pseudocode">
+							<div>1. Initialize x, y</div>
+							<div>2. Calculate dx = x2 - x1, dy = y2 - y1</div>
+							<div>3. Calculate steps = max(|dx|, |dy|)</div>
+							<div>
+								4. Calculate x_increment = dx/steps, y_increment = dy/steps
+							</div>
+							<div>5. For i = 0 to steps:</div>
+							<div class="indent">Plot(round(x), round(y))</div>
+							<div class="indent">x = x + x_increment</div>
+							<div class="indent">y = y + y_increment</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-            <label for="speedRange">Speed (ms): </label>
-            <input type="range" id="speedRange" min="50" max="1000" value="200" />
-            <span id="speedDisplay">200</span> ms
-        </div>
+		<script type="module" src="js/main.js"></script>
+		<script>
+			const algorithm_data = {
+				DDA: {
+					description:
+						'Uses incremental calculation to draw lines by calculating intermediate points along the line path using floating-point arithmetic.',
+					code: {
+						'1. Initialize x, y': '',
+						'2. Calculate dx = x2 - x1, dy = y2 - y1': '',
+						'3. Calculate steps = max(|dx|, |dy|)': '',
+						'4. Calculate x_increment = dx/steps, y_increment = dy/steps': '',
+						'5. For i = 0 to steps:': [
+							'Plot(round(x), round(y))',
+							' x = x + x_increment',
+							'y = y + y_increment',
+						],
+					},
+				},
+				Bresenham: {
+					description:
+						'An efficient line drawing algorithm that uses only integer arithmetic to determine which pixel is closest to the line path.',
+					code: {
+						'1. Initialize x, y': '',
+						'2. Calculate dx = x2 - x1, dy = y2 - y1': '',
+						'3. Initialize p = 2*dy - dx': '',
+						'4. For x = x1 to x2:': [
+							'Plot(x, y)',
+							'if p >= 0:',
+							'  y = y + 1',
+							'  p = p + 2*(dy - dx)',
+							'else:',
+							'  p = p + 2*dy',
+						],
+					},
+				},
+				'Midpoint Circle': {
+					description:
+						'Draws a circle using the midpoint decision parameter to determine the closest pixel in each octant, exploiting circle symmetry.',
+					code: {
+						'1. Initialize x = 0, y = r': '',
+						'2. Initialize p = 1 - r': '',
+						'3. While x <= y:': [
+							'Plot all 8 symmetric points of (x, y)',
+							'x = x + 1',
+							'if p < 0:',
+							'  p = p + 2*x + 1',
+							'else:',
+							'  y = y - 1',
+							'  p = p + 2*(x - y) + 1',
+						],
+					},
+				},
+				'Midpoint Ellipse': {
+					description:
+						'Draws an ellipse by dividing it into two regions and using midpoint criteria to decide the closest pixel at each step.',
+					code: {
+						'1. Initialize x = 0, y = ry': '',
+						'2. Calculate initial decision parameter for Region 1': '',
+						'3. While (2*ry^2*x) < (2*rx^2*y):': [
+							'Plot all 4 symmetric points of (x, y)',
+							'x = x + 1',
+							'if p1 < 0:',
+							'  p1 = p1 + 2*ry^2*x + ry^2',
+							'else:',
+							'  y = y - 1',
+							'  p1 = p1 + 2*ry^2*x - 2*rx^2*y + ry^2',
+						],
+						'4. Calculate initial decision parameter for Region 2': '',
+						'5. While y >= 0:': [
+							'Plot all 4 symmetric points of (x, y)',
+							'y = y - 1',
+							'if p2 > 0:',
+							'  p2 = p2 - 2*rx^2*y + rx^2',
+							'else:',
+							'  x = x + 1',
+							'  p2 = p2 + 2*ry^2*x - 2*rx^2*y + rx^2',
+						],
+					},
+				},
+			};
+			const card_title = document.querySelector('.card-title');
+			const content_block = document.querySelector('.content-block');
+			const pseudo_code = document.querySelector('.pseudocode');
 
-        <div class="canvas-wrapper" style="position: relative;">
-            <canvas id="canvas" width="600" height="450" style="border:1px solid #000;"></canvas>
-            <div id="tooltip"
-                style="position:absolute; pointer-events:none; background:#eee; padding:4px; border:1px solid #999; border-radius:4px; font-size:12px; display:none;">
-            </div>
-        </div>
+			const current_algo = document.getElementById('algorithm');
+			const algo_options = document.querySelectorAll('.algo-option');
+			const options = document.querySelector('.algo-options');
 
-        <div id="sidebar">
-            <h2>Algorithm Info</h2>
-            <div id="algoDescription"></div>
-            <div id="algoStepInfo"></div>
-        </div>
-    </div>
+			const playBtn = document.getElementById('playBtn');
+			const pauseBtn = document.getElementById('pauseBtn');
 
-    <script type="module" src="js/main.js"></script>
-</body>
+			function hideAllChecks() {
+				algo_options.forEach((el) => {
+					const svg = el.querySelector('svg');
+					if (svg) svg.style.visibility = 'hidden';
+				});
+			}
 
+			function renderAlgorithm(name, key) {
+				const data = algorithm_data[key];
+				card_title.textContent = `${name} Algorithm`;
+
+				const algo_title = content_block.querySelector('h3');
+				algo_title.textContent = `${name} Algorithm`;
+
+				const algo_desc = content_block.querySelector('p');
+				algo_desc.textContent = data.description;
+
+				pseudo_code.innerHTML = '';
+				for (const [step, value] of Object.entries(data.code)) {
+					const stepElement = document.createElement('div');
+					stepElement.textContent = step;
+					pseudo_code.appendChild(stepElement);
+
+					if (Array.isArray(value)) {
+						value.forEach((line) => {
+							const lineElement = document.createElement('div');
+							lineElement.className = 'indent';
+							lineElement.textContent = line;
+							pseudo_code.appendChild(lineElement);
+						});
+					} else if (value) {
+						const lineElement = document.createElement('div');
+						lineElement.textContent = value;
+						pseudo_code.appendChild(lineElement);
+					}
+				}
+			}
+
+			algo_options.forEach((element) => {
+				element.addEventListener('click', (e) => {
+					const target = e.target.closest('li');
+					if (!target) return;
+
+					const algoName = target.textContent.trim();
+					current_algo.querySelector('.current-algo').textContent = algoName;
+
+					hideAllChecks();
+
+					const svg = target.querySelector('svg');
+					if (svg) {
+						svg.style.visibility =
+							svg.style.visibility === 'visible' ? 'hidden' : 'visible';
+					}
+
+					const mapping = {
+						'DDA Line': 'DDA',
+						'Bresenham Line': 'Bresenham',
+						'Midpoint Circle': 'Midpoint Circle',
+						'Midpoint Ellipse': 'Midpoint Ellipse',
+					};
+
+					if (mapping[algoName]) {
+						renderAlgorithm(algoName.replace(' Line', ''), mapping[algoName]);
+					}
+
+					console.log(algoName);
+				});
+			});
+
+			current_algo.addEventListener('click', () => {
+				options.classList.toggle('show');
+			});
+
+			let speedIncrease = document.getElementById('speedIncrease');
+			let speedDecrease = document.getElementById('speedDecrease');
+
+			speedIncrease.addEventListener('click', () => {
+				let speedRange = document.getElementById('speedRange');
+				let speed = parseInt(speedRange.textContent);
+				speedRange.textContent = speed + 50;
+			});
+			speedDecrease.addEventListener('click', () => {
+				let speedRange = document.getElementById('speedRange');
+				let speed = parseInt(speedRange.textContent);
+				if (speed > 50) {
+					speedRange.textContent = speed - 50;
+				}
+			});
+		</script>
+	</body>
 </html>
