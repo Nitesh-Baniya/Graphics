@@ -1,67 +1,110 @@
-# Graphics Algorithms Simulator
+# 📢 **Graphics Algorithms Simulator**
 
-This is a web-based interactive tool designed to visualize the step-by-step execution of fundamental computer graphics algorithms. It was developed as a 5th-semester project for the Computer Graphics course at IOE, Pulchowk Campus.
+A web-based tool to visualize step-by-step execution of computer graphics algorithms on an interactive grid canvas. Built for the 5th-semester Computer Graphics course at IOE, Pulchowk Campus using HTML, CSS, and JavaScript.
 
-The application provides a grid-based canvas where users can see how algorithms like DDA, Bresenham's, Midpoint Circle, and Midpoint Ellipse plot pixels to form shapes.
+## 📌 **Table of Contents**
 
-## Features
+- [Preview](#preview)
 
-*   **Interactive Visualization:** Click on the grid to define points and see the algorithms in action.
-*   **Algorithm Selection:** Choose from a list of implemented graphics algorithms.
-*   **Playback Controls:**
-    *   Play/Pause the animation.
-    *   Step through the algorithm one step at a time (Next/Previous).
-    *   Reset the canvas.
-*   **Speed Control:** Adjust the animation speed to better understand the process.
-*   **Grid Customization:** Change the cell size of the grid for better viewing.
-*   **Coordinate Tooltip:** Hover over the grid to see the coordinates of each cell.
-*   **Algorithm Information:** View a description and pseudocode for the currently selected algorithm.
+- [Features](#features)
 
-## Algorithms Implemented
+- [Prerequisites](#prerequisites)
 
-The simulator currently supports the following algorithms:
+- [Installation](#installation)
 
-1.  **DDA Line Algorithm**
-2.  **Bresenham's Line Algorithm**
-3.  **Midpoint Circle Algorithm**
-4.  **Midpoint Ellipse Algorithm**
+- [Usage](#usage)
 
-## How to Use
+- [How It Works](#how-it-works)
 
-1.  Open the `index.html` file in a modern web browser.
-2.  Select an algorithm from the "Algorithm" dropdown menu.
-3.  Follow the on-screen prompts to select points on the grid:
-    *   **For Lines (DDA, Bresenham):** Click two points on the grid to define the start and end of the line.
-    *   **For Midpoint Circle:** Click to set the center, then click a second point to determine the radius.
-    *   **For Midpoint Ellipse:** Click to set the center, then click a second point to define the radii (rx and ry).
-4.  The algorithm will automatically run and visualize the drawing process.
-5.  Use the playback controls to play, pause, step through, or reset the animation.
-6.  Adjust the speed and cell size using the controls at the top.
+- [Dependencies](#dependencies)
 
-## Project Structure
+- [License](#license)
 
-The project is organized into the following files and directories:
+- [Contributing](#contributing)
 
+## 📸 **Preview**
+
+<div align="center">
+  <img src="./assets/preview.png?raw=true" height="700"/>
+</div>
+
+## 🚀 **Features**
+
+- **Interactive Grid Canvas**: Click to set points for algorithm visualization.
+
+- **Algorithm Selection**: Choose DDA, Bresenham’s Line, Midpoint Circle, or Midpoint Ellipse.
+
+- **Playback Controls**: Play, pause, step forward/backward, or reset animation.
+
+- **Speed Adjustment**: Adjust animation speed (50ms increments, min 50ms).
+
+- **Grid Customization**: Adjust cell size (1px increments, min 1px).
+
+- **Coordinate Tooltip**: Hover to view cell coordinates.
+
+- **Algorithm Info**: Displays description and pseudocode for selected algorithm.
+
+- **Supported Algorithms**:
+
+  - DDA Line
+
+  - Bresenham’s Line
+
+  - Midpoint Circle
+
+  - Midpoint Ellipse
+
+## ⚙ **Prerequisites**
+
+- Modern web browser (e.g., Chrome, Firefox, Edge)
+
+## 🔧 **Installation**
+
+### 1️⃣ Clone the repository
+
+```sh
+git clone https://github.com/rohityadav-sas/Graphics.git
+
+cd Graphics
 ```
-.
-├── css/
-│   └── style.css           # All styles for the application
-├── js/
-│   ├── algorithms/
-│   │   ├── bresenham.js      # Bresenham's Line algorithm logic
-│   │   ├── dda.js            # DDA Line algorithm logic
-│   │   ├── midpoint_circle.js # Midpoint Circle algorithm logic
-│   │   └── midpoint_ellipse.js# Midpoint Ellipse algorithm logic
-│   ├── algorithm.json        # Descriptions and pseudocode for algorithms
-│   ├── animationController.js# Handles playback (play, pause, step)
-│   ├── canvasManager.js      # Manages the canvas, grid, and drawing
-│   ├── main.js               # Main script, event handling, and app logic
-│   ├── tooltip.js            # Manages the coordinate tooltip
-│   └── uiControls.js         # Connects UI buttons to their actions
-├── index.html                # The main HTML file
-└── README.md                 # This file
+
+### 2️⃣ Serve the application
+
+Open `index.html` in a browser or use a local server:
+
+```sh
+# Example with Python
+python -m http.server 8000
 ```
 
-## Author
+## 🔍 How It Works
 
-*   [Your Name] - [Your Email/GitHub Profile]
+- **Select Algorithm**: Choose from dropdown (DDA, Bresenham, Circle, Ellipse).
+
+- **Set Points**:
+
+  - **Lines**: Click two points for start/end.
+
+  - **Circle**: Click center, then radius point.
+
+  - **Ellipse**: Click center, then point for rx/ry.
+
+- **Visualize**: Algorithm plots pixels step-by-step.
+
+- **Control Animation**: Play, pause, step, or reset; adjust speed/cell size.
+
+- **View Info**: Algorithm description and pseudocode displayed.
+
+- **Tooltip**: Hover over grid for coordinates.
+
+## Dependencies
+
+- None (Pure HTML, CSS, JavaScript)
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
