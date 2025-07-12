@@ -7,6 +7,8 @@ let stepCallback = null;
 let curStep = document.getElementById('current-step');
 let finalStep = document.getElementById('final-step');
 let progressFill = document.getElementById('progress-fill');
+let prevBtn = document.getElementById('prevBtn');
+let nextBtn = document.getElementById('nextBtn');
 
 export function setPixels(newPixels, callback) {
 	pixels = newPixels;
@@ -22,12 +24,19 @@ export async function play() {
 	if (isPlaying) return;
 	isPlaying = true;
 	while (currentStep < pixels.length && isPlaying) {
+		prevBtn.disabled = false;
+		nextBtn.disabled = false;
 		finalStep.textContent = pixels.length;
 		if (stepCallback) stepCallback(currentStep, pixels[currentStep]);
 		await new Promise((r) => setTimeout(r, delay));
 		currentStep++;
 		curStep.textContent = currentStep;
 		progressFill.style.width = `${(currentStep / pixels.length) * 100}%`;
+		if (currentStep === pixels.length) {
+			nextBtn.disabled = true;
+		} else {
+			nextBtn.disabled = false;
+		}
 	}
 	isPlaying = false;
 }
@@ -42,6 +51,12 @@ export function nextStep() {
 		currentStep++;
 		curStep.textContent = currentStep;
 		progressFill.style.width = `${(currentStep / pixels.length) * 100}%`;
+		if (currentStep === pixels.length) {
+			nextBtn.disabled = true;
+		} else {
+			nextBtn.disabled = false;
+		}
+		prevBtn.disabled = false;
 	}
 }
 
@@ -51,6 +66,12 @@ export function prevStep() {
 		if (stepCallback) stepCallback(currentStep - 1, pixels[currentStep - 1]);
 		curStep.textContent = currentStep;
 		progressFill.style.width = `${(currentStep / pixels.length) * 100}%`;
+		if (currentStep == 0) {
+			prevBtn.disabled = true;
+		} else {
+			prevBtn.disabled = false;
+		}
+		nextBtn.disabled = false;
 	}
 }
 
@@ -62,4 +83,6 @@ export function reset() {
 	curStep.textContent = '0';
 	finalStep.textContent = '0';
 	progressFill.style.width = '0%';
+	prevBtn.disabled = true;
+	nextBtn.disabled = true;
 }
