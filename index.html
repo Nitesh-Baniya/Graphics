@@ -159,7 +159,7 @@
 							</button>
 							<button
 								class="seek-control-children"
-								style="position: relative; transition: all 0.2s ease-in-out"
+								style="position: relative; transition: all 0.3s ease-in-out"
 								id="playPauseBtn"
 							>
 								<div
@@ -311,8 +311,12 @@
 				"
 			></div>
 			<div class="canvas-wrapper">
-				<div>Visualization</div>
+				<h3>Interactive Visualization</h3>
 				<canvas id="canvas"></canvas>
+				<p>
+					Click to set start point, click again to set end point and run
+					algorithm
+				</p>
 			</div>
 
 			<div class="card">
@@ -509,6 +513,8 @@
 
 			current_algo.addEventListener('click', () => {
 				options.classList.toggle('show');
+				const selectorSvg = current_algo.querySelector('svg');
+				selectorSvg.classList.toggle('rotate');
 			});
 
 			let speedIncrease = document.getElementById('speedIncrease');
