@@ -5,8 +5,8 @@
 }
 
 body {
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-		Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 	padding: 10px;
 	background: oklch(93% 0.034 272.788);
 }
@@ -14,7 +14,7 @@ body {
 .container {
 	display: flex;
 	flex-direction: column;
-	gap: 4rem;
+	gap: 2rem;
 }
 
 header {
@@ -218,8 +218,8 @@ canvas:hover {
 	font-size: 1.5rem;
 	flex-direction: column;
 	gap: 2rem;
-	width: 75%;
-	min-height: 900px;
+	width: 90%;
+	min-height: 700px;
 	margin-inline: auto;
 	background-color: rgba(255, 255, 255, 0.95);
 	backdrop-filter: blur(24px);
@@ -344,16 +344,6 @@ canvas:hover {
 	color: #fff;
 }
 
-.step-counter {
-	padding-inline: 1.5rem;
-	padding-block: 1rem;
-	display: flex;
-	flex-direction: column;
-	gap: 0.8rem;
-	color: oklch(37.3% 0.034 259.733);
-	font-weight: 500;
-}
-
 #progress-bar {
 	width: 100%;
 	height: 20px;
@@ -367,4 +357,266 @@ canvas:hover {
 	border-radius: 50px;
 	transition: width 0.3s ease;
 	background-color: black;
+}
+
+.floating-controls-btn {
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	width: 60px;
+	height: 60px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+}
+
+.floating-controls-btn:hover {
+	transform: scale(1.1);
+	box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+.floating-controls-btn svg {
+	color: white;
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	z-index: 2000;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	pointer-events: none;
+	padding-bottom: 30px;
+}
+
+.modal-content {
+	background: white;
+	border-radius: 12px;
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+	max-width: 600px;
+	width: 600px;
+	height: auto;
+	max-height: 350px;
+	overflow: hidden;
+	position: relative;
+	cursor: move;
+	pointer-events: all;
+	height: max-content;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 16px 0 16px;
+	border-bottom: 1px solid #e5e7eb;
+	padding-bottom: 10px;
+	cursor: move;
+}
+
+.modal-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #1f2937;
+}
+
+.close-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 4px;
+	transition: background-color 0.2s;
+}
+
+.close-btn svg {
+	width: 16px;
+	height: 16px;
+}
+
+.close-btn:hover {
+	background-color: #f3f4f6;
+}
+
+.modal-body {
+	padding: 16px;
+}
+
+.modal .controls-body {
+	display: flex;
+	flex-direction: row;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+}
+
+.modal .controls-body-common {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+	padding: 0;
+	flex: 1;
+	min-width: 140px;
+}
+
+.modal .step-counter {
+	margin-top: 0.75rem;
+	padding: 0;
+	border-top: 1px solid #e5e7eb;
+	padding-top: 0.75rem;
+	width: 100%;
+}
+
+.modal .modal-title {
+	font-size: 1.1rem;
+}
+
+.modal .control-labels {
+	font-size: 0.8rem;
+}
+
+.modal .current-algo {
+	font-size: 0.8rem;
+}
+
+.modal .algo-option span {
+	font-size: 0.8rem;
+}
+
+.modal .manipulate-value {
+	font-size: 0.8rem;
+	height: 32px;
+	width: 40px;
+}
+
+.modal .seek-control-children {
+	height: 32px;
+	width: 40px;
+}
+
+.modal .seek-control-children svg {
+	width: 16px;
+	height: 16px;
+}
+
+.modal .step-counter label {
+	font-size: 0.8rem;
+}
+
+.modal #speedRange,
+.modal #cellSize,
+.modal #current-step,
+.modal #final-step {
+	font-size: 0.8rem;
+}
+
+.modal #algorithm {
+	padding: 0.4rem 0.6rem;
+	font-size: 0.8rem;
+	border-radius: 0.5rem;
+}
+
+.modal .algo-options {
+	gap: 0.2rem;
+	max-height: 150px;
+	margin-top: 0.25rem;
+	border-radius: 0.5rem;
+}
+
+.modal .algo-options.show {
+	max-height: 150px;
+}
+
+.modal .algo-option {
+	padding: 0.4rem 0.6rem;
+	font-size: 0.75rem;
+}
+
+.modal #progress-bar {
+	height: 16px;
+}
+
+.modal .speed-control,
+.modal .controls-body-common > div:last-child {
+	margin-top: 0.2rem;
+}
+
+@media (max-width: 768px) {
+	.modal-content {
+		width: 90vw;
+		max-width: 500px;
+		max-height: 70vh;
+	}
+
+	.modal .controls-body {
+		flex-direction: column;
+	}
+
+	.modal .controls-body-common {
+		min-width: auto;
+	}
+}
+
+.controls-body {
+	display: flex;
+	justify-content: space-between;
+}
+
+.controls-body-common {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	width: 25%;
+	padding-inline: 1.5rem;
+	padding-block: 1rem;
+}
+
+.seek-controls {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.seek-control-children {
+	border: 1px solid #ccc;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	width: 50px;
+	border-radius: 0.7rem;
+	cursor: pointer;
+}
+
+.seek-control-children svg {
+	width: 20px;
+	height: 20px;
+}
+
+.control-labels {
+	padding-inline: 0.2rem;
+	font-size: 1rem;
+	font-weight: 500;
+	color: oklch(37.3% 0.034 259.733);
+}
+
+.step-counter {
+	padding-inline: 1.5rem;
+	padding-block: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
+	color: oklch(37.3% 0.034 259.733);
+	font-weight: 500;
 }

@@ -2,6 +2,7 @@ import * as CanvasMgr from "./canvasManager.js"
 import * as AnimationCtrl from "./animationController.js"
 import * as Tooltip from "./tooltip.js"
 import * as UIControls from "./uiControls.js"
+import * as ModalCtrl from "./modalController.js"
 import { getDDAPixels } from "./algorithms/dda.js"
 import { getBresenhamPixels } from "./algorithms/bresenham.js"
 import { getMidpointCirclePixels } from "./algorithms/midpoint_circle.js"
@@ -107,6 +108,8 @@ function runAlgorithm() {
 	})
 
 	AnimationCtrl.play()
+	ModalCtrl.showFloatingButton()
+	ModalCtrl.openModal()
 }
 
 function reset() {
@@ -115,6 +118,8 @@ function reset() {
 	currentPixels = []
 	AnimationCtrl.reset()
 	CanvasMgr.drawGrid()
+	ModalCtrl.hideFloatingButton()
+	ModalCtrl.closeModal()
 }
 
 UIControls.setupControls({
@@ -180,5 +185,7 @@ canvas.addEventListener("mouseleave", () => {
 })
 
 CanvasMgr.setOnCellSizeChangeCallback(redrawCurrentState)
+
+ModalCtrl.initModal()
 
 CanvasMgr.drawGrid()
