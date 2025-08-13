@@ -12,11 +12,11 @@ function resizeCanvas() {
 	const rect = canvas.getBoundingClientRect()
 	const width = rect.width || 800
 	const height = rect.height || 600
-	
+
 	// Set canvas internal dimensions
 	canvas.width = width
 	canvas.height = height
-	
+
 	// Recalculate grid dimensions
 	cols = Math.floor((width - marginLeft) / pixelSize)
 	rows = Math.floor((height - marginTop) / pixelSize)
@@ -32,14 +32,14 @@ function initCanvas() {
 }
 
 // Wait for DOM to be fully loaded
-if (document.readyState === 'loading') {
-	document.addEventListener('DOMContentLoaded', initCanvas)
+if (document.readyState === "loading") {
+	document.addEventListener("DOMContentLoaded", initCanvas)
 } else {
 	initCanvas()
 }
 
 // Add resize event listener
-window.addEventListener('resize', () => {
+window.addEventListener("resize", () => {
 	setTimeout(() => {
 		resizeCanvas()
 		drawGrid()
