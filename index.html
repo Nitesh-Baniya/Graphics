@@ -482,47 +482,6 @@
 			const selectorSvg = current_algo.querySelector('svg');
 			selectorSvg.classList.toggle('rotate');
 		});
-
-		let speedIncrease = document.getElementById('speedIncrease');
-		let speedDecrease = document.getElementById('speedDecrease');
-
-		speedIncrease.addEventListener('click', () => {
-			let speedRange = document.getElementById('speedRange');
-			let speed = parseInt(speedRange.textContent);
-			if (speed < 50) {
-				speedRange.textContent = speed + 10;
-			} else {
-				speedRange.textContent = speed + 50;
-			}
-
-			if (speedDecrease.disabled) {
-				speedDecrease.disabled = false;
-				speedDecrease.style.opacity = '1';
-				speedDecrease.style.cursor = 'pointer';
-			}
-		});
-		speedDecrease.addEventListener('click', () => {
-			let speedRange = document.getElementById('speedRange');
-			let speed = parseInt(speedRange.textContent);
-			if (speed <= 10 && speed > 1) {
-				// At 10ms or below, decrease by 2ms (minimum 1ms)
-				const newSpeed = Math.max(1, speed - 2);
-				speedRange.textContent = newSpeed;
-				
-				// Disable button if we reach 1ms
-				if (newSpeed === 1) {
-					speedDecrease.disabled = true;
-					speedDecrease.style.opacity = '0.5';
-					speedDecrease.style.cursor = 'not-allowed';
-				}
-			} else if (speed <= 50 && speed > 10) {
-				// Between 10ms and 50ms, decrease by 10ms
-				speedRange.textContent = speed - 10;
-			} else if (speed > 50) {
-				// Above 50ms, decrease by 50ms
-				speedRange.textContent = speed - 50;
-			}
-		});
 	</script>
 </body>
 

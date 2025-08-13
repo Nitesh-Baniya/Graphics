@@ -37,13 +37,17 @@ export function setupControls(handlers) {
 
 	speedIncrease.onclick = () => {
 		const currentSpeed = parseInt(speedRange.textContent, 10)
+		let newSpeed
 		if (currentSpeed < 50) {
 			// Below 50ms, increment by 10ms
-			handlers.onSpeedChange(currentSpeed + 10)
+			newSpeed = currentSpeed + 10
 		} else {
 			// 50ms and above, increment by 50ms
-			handlers.onSpeedChange(currentSpeed + 50)
+			newSpeed = currentSpeed + 50
 		}
+
+		speedRange.textContent = newSpeed
+		handlers.onSpeedChange(newSpeed)
 
 		// Re-enable decrease button if it was disabled
 		if (speedDecrease.disabled) {
@@ -55,9 +59,21 @@ export function setupControls(handlers) {
 
 	speedDecrease.onclick = () => {
 		const currentSpeed = parseInt(speedRange.textContent, 10)
+		let newSpeed
+
 		if (currentSpeed <= 10 && currentSpeed > 1) {
-			// At 10ms or below, decrease by 2ms (minimum 1ms)
-			const newSpeed = Math.max(1, currentSpeed - 2)
+			// At 10ms or below, decrease by 1ms (minimum 1ms)
+			newSpeed = Math.max(1, currentSpeed - 1)
+		} else if (currentSpeed <= 50 && currentSpeed > 10) {
+			// Between 10ms and 50ms, decrease by 10ms
+			newSpeed = currentSpeed - 10
+		} else if (currentSpeed > 50) {
+			// Above 50ms, decrease by 50ms
+			newSpeed = currentSpeed - 50
+		}
+
+		if (newSpeed) {
+			speedRange.textContent = newSpeed
 			handlers.onSpeedChange(newSpeed)
 
 			// Disable button if we reach 1ms
@@ -66,12 +82,6 @@ export function setupControls(handlers) {
 				speedDecrease.style.opacity = "0.5"
 				speedDecrease.style.cursor = "not-allowed"
 			}
-		} else if (currentSpeed <= 50 && currentSpeed > 10) {
-			// Between 10ms and 50ms, decrease by 10ms
-			handlers.onSpeedChange(currentSpeed - 10)
-		} else if (currentSpeed > 50) {
-			// Above 50ms, decrease by 50ms
-			handlers.onSpeedChange(currentSpeed - 50)
 		}
 	}
 }

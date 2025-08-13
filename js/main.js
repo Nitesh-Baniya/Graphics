@@ -129,7 +129,6 @@ function reset() {
 	currentPixels = []
 	AnimationCtrl.reset()
 	CanvasMgr.drawGrid()
-	ModalCtrl.hideFloatingButton()
 	ModalCtrl.closeModal()
 }
 
