@@ -8,6 +8,17 @@ import { getBresenhamPixels } from "./algorithms/bresenham.js"
 import { getMidpointCirclePixels } from "./algorithms/midpoint_circle.js"
 import { getMidpointEllipsePixels } from "./algorithms/midpoint_ellipse.js"
 
+// Set up resize callback to preserve drawn content
+CanvasMgr.setOnResizeCallback(() => {
+	// Redraw current state after resize
+	const currentAnimationStep = AnimationCtrl.getCurrentStep()
+	if (currentPixels.length > 0) {
+		redraw(currentAnimationStep)
+	} else {
+		redraw()
+	}
+})
+
 let algoElement = document.querySelector(".current-algo")
 
 algoElement.addEventListener("change", (e) => {

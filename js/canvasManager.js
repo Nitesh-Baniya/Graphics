@@ -6,6 +6,9 @@ const marginLeft = 40
 const marginTop = 40
 let cols, rows
 
+// Callback to redraw content after resize
+let onResizeCallback = null
+
 // Function to resize canvas based on container
 function resizeCanvas() {
 	// Get the computed dimensions from CSS
@@ -43,8 +46,17 @@ window.addEventListener("resize", () => {
 	setTimeout(() => {
 		resizeCanvas()
 		drawGrid()
+		// Call the resize callback to redraw content if available
+		if (onResizeCallback) {
+			onResizeCallback()
+		}
 	}, 100) // Small delay to ensure layout is complete
 })
+
+// Function to set resize callback for redrawing content
+export function setOnResizeCallback(callback) {
+	onResizeCallback = callback
+}
 
 let cellIncrease = document.getElementById("cellIncrease")
 let cellDecrease = document.getElementById("cellDecrease")
@@ -54,17 +66,17 @@ let onCellSizeChangeCallback = null
 
 cellIncrease.addEventListener("click", () => {
 	let size = parseInt(cellSize.textContent)
-	cellSize.textContent = size + 1
-	pixelSize = size + 1
+	cellSize.textContent = size + 2
+	pixelSize = size + 2
 	setCellSize(pixelSize)
 })
 
 cellDecrease.addEventListener("click", () => {
 	let size = parseInt(cellSize.textContent)
-	if (size > 1) {
-		cellSize.textContent = size - 1
+	if (size > 2) {
+		cellSize.textContent = size - 2
 	}
-	pixelSize = size - 1
+	pixelSize = size - 2
 	setCellSize(pixelSize)
 })
 
