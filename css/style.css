@@ -402,8 +402,8 @@ canvas:hover {
 	background: white;
 	border-radius: 12px;
 	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-	max-width: 600px;
-	width: 600px;
+	max-width: 480px;
+	width: 480px;
 	height: auto;
 	max-height: 350px;
 	overflow: hidden;
@@ -465,6 +465,20 @@ canvas:hover {
 	padding: 0;
 	flex: 1;
 	min-width: 140px;
+}
+
+.modal .controls-body-side {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+	padding: 0;
+	min-width: 120px;
+}
+
+.modal .control-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
 }
 
 .modal .step-counter {
@@ -552,7 +566,7 @@ canvas:hover {
 @media (max-width: 768px) {
 	.modal-content {
 		width: 90vw;
-		max-width: 500px;
+		max-width: 420px;
 		max-height: 70vh;
 	}
 
@@ -561,6 +575,14 @@ canvas:hover {
 	}
 
 	.modal .controls-body-common {
+		min-width: auto;
+	}
+
+	.modal .controls-body-side {
+		min-width: auto;
+	}
+
+	.modal .control-group {
 		min-width: auto;
 	}
 }
