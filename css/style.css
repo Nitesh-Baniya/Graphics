@@ -217,7 +217,7 @@ canvas:hover {
 	font-weight: bold;
 	font-size: 1.5rem;
 	flex-direction: column;
-	gap: 2rem;
+	gap: 1rem;
 	width: 90%;
 	min-height: 700px;
 	margin-inline: auto;
@@ -225,24 +225,21 @@ canvas:hover {
 	backdrop-filter: blur(24px);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	border-radius: 1.5rem;
-	padding: 2rem;
+	padding: 1rem;
 	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 .canvas-wrapper h3 {
 	font-size: 1.5rem;
-	line-height: 2rem;
 	font-weight: 700;
 	color: #1f2937;
 	text-align: center;
-	margin-bottom: 1.5rem;
 	letter-spacing: -0.015em;
 }
 
 .canvas-wrapper p {
 	text-align: center;
 	color: #6b6e72;
-	margin-top: 1rem;
 	font-size: 0.875rem;
 	line-height: 1.25rem;
 }
