@@ -109,7 +109,7 @@ function runAlgorithm() {
 
 	AnimationCtrl.play()
 	ModalCtrl.showFloatingButton()
-	ModalCtrl.openModal()
+	showControlsNotification()
 }
 
 function reset() {
@@ -185,6 +185,55 @@ canvas.addEventListener("mouseleave", () => {
 })
 
 CanvasMgr.setOnCellSizeChangeCallback(redrawCurrentState)
+
+function showControlsNotification() {
+	// Don't show notification if modal is already open
+	if (ModalCtrl.isModalVisible()) {
+		return
+	}
+
+	// Create notification element if it doesn't exist
+	let notification = document.getElementById("controlsNotification")
+	if (!notification) {
+		notification = document.createElement("div")
+		notification.id = "controlsNotification"
+		notification.innerHTML = `
+			<div class="curved-arrow-notification">
+				<div class="notification-text">Click the settings icon for controls</div>
+				<svg class="curved-arrow" width="120" height="80" viewBox="0 0 120 80">
+					<defs>
+						<marker id="arrowhead" markerWidth="8" markerHeight="8" 
+						 refX="6" refY="4" orient="auto">
+							<path d="M 1 1 L 6 4 L 1 7" 
+								  stroke="#6366f1" 
+								  stroke-width="1" 
+								  fill="none" 
+								  stroke-linecap="round" 
+								  stroke-linejoin="round" />
+						</marker>
+					</defs>
+					<path d="M 10 20 Q 60 5, 110 60" 
+						  stroke="#6366f1" 
+						  stroke-width="3" 
+						  fill="none" 
+						  stroke-linecap="round"
+						  marker-end="url(#arrowhead)" />
+				</svg>
+			</div>
+		`
+		document.body.appendChild(notification)
+	}
+
+	// Show notification with animation
+	notification.style.display = "block"
+	setTimeout(() => notification.classList.add("show"), 100)
+
+	// Auto-hide after 5 seconds
+	setTimeout(() => {
+		notification.classList.remove("show")
+		setTimeout(() => (notification.style.display = "none"), 300)
+	}, 5000)
+}
 
 ModalCtrl.initModal()
 
