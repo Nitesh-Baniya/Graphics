@@ -17,6 +17,10 @@ body {
 	gap: 2rem;
 }
 
+#openModal svg {
+	height: 35px;
+}
+
 header {
 	text-align: center;
 }
