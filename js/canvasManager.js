@@ -14,7 +14,6 @@ let cellIncrease = document.getElementById("cellIncrease")
 let cellDecrease = document.getElementById("cellDecrease")
 let cellSize = document.getElementById("cellSize")
 
-// Callback function to be called when cell size changes
 let onCellSizeChangeCallback = null
 
 cellIncrease.addEventListener("click", () => {
@@ -43,7 +42,6 @@ export function setCellSize(size) {
 	rows = Math.floor((canvas.height - marginTop) / pixelSize)
 	drawGrid()
 
-	// Call the callback to redraw current state if it exists
 	if (onCellSizeChangeCallback) {
 		onCellSizeChangeCallback()
 	}
@@ -64,7 +62,6 @@ export function clearCanvas() {
 export function drawGrid() {
 	clearCanvas()
 
-	// Draw gray pixel background
 	for (let c = 0; c < cols; c++) {
 		for (let r = 0; r < rows; r++) {
 			ctx.fillStyle = "#eee"
@@ -78,7 +75,6 @@ export function drawGrid() {
 	}
 
 	ctx.strokeStyle = "#ccc"
-	// vertical lines
 	for (let c = 0; c <= cols; c++) {
 		const x = marginLeft + c * pixelSize
 		ctx.beginPath()
@@ -86,7 +82,6 @@ export function drawGrid() {
 		ctx.lineTo(x, marginTop + rows * pixelSize)
 		ctx.stroke()
 	}
-	// horizontal lines
 	for (let r = 0; r <= rows; r++) {
 		const y = marginTop + r * pixelSize
 		ctx.beginPath()
@@ -95,7 +90,6 @@ export function drawGrid() {
 		ctx.stroke()
 	}
 
-	// Axis coordinates
 	ctx.fillStyle = "black"
 	ctx.textAlign = "center"
 	ctx.textBaseline = "middle"
