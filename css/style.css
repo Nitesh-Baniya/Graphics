@@ -38,7 +38,7 @@ header {
 }
 
 .title {
-	font-size: 3rem;
+	font-size: 2.5rem;
 	font-weight: bold;
 	color: oklch(21% 0.034 264.665);
 	margin-bottom: 1rem;
@@ -46,7 +46,7 @@ header {
 }
 
 .title-description {
-	font-size: 1.125rem;
+	font-size: 1rem;
 	color: oklch(44.6% 0.03 256.802);
 	line-height: 1.6;
 	max-width: 600px;
@@ -274,7 +274,7 @@ canvas:hover {
 	border: 1px solid #ddd;
 	padding: 1.5rem 0;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-	width: 75%;
+	width: 90%;
 	margin: auto;
 }
 .card-header {
@@ -832,5 +832,65 @@ canvas:hover {
 	50% {
 		opacity: 0.7;
 		transform: scale(0.95);
+	}
+}
+
+/* Footer styles */
+footer {
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.7),
+		rgba(240, 245, 255, 0.8)
+	);
+	backdrop-filter: blur(24px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 1.5rem;
+	padding: 1rem 2rem;
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+	width: 90%;
+	margin-inline: auto;
+	margin-bottom: 2rem;
+}
+
+.footer-bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.footer-bottom p {
+	color: oklch(37.3% 0.034 259.733);
+	font-size: 0.85rem;
+	margin: 0;
+}
+
+.footer-links a {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: oklch(52.3% 0.126 264.665);
+	text-decoration: none;
+	font-size: 0.9rem;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	background: rgba(255, 255, 255, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.footer-links a:hover {
+	color: oklch(21% 0.034 264.665);
+	background: rgba(255, 255, 255, 0.8);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+	.footer-bottom {
+		flex-direction: column;
+		text-align: center;
 	}
 }
