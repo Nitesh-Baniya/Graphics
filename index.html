@@ -272,16 +272,16 @@
 				<div class="content-block">
 					<h4 class="font-medium">Pseudocode:</h4>
 					<div class="pseudocode">
-						<div>1. Initialize x, y</div>
-						<div>2. Calculate dx = x2 - x1, dy = y2 - y1</div>
-						<div>3. Calculate steps = max(|dx|, |dy|)</div>
+						<div>1. Initialize <span class="variable">x</span>, <span class="variable">y</span></div>
+						<div>2. Calculate <span class="variable">dx</span> <span class="operator">=</span> <span class="variable">x</span><sub>2</sub> <span class="operator">-</span> <span class="variable">x</span><sub>1</sub>, <span class="variable">dy</span> <span class="operator">=</span> <span class="variable">y</span><sub>2</sub> <span class="operator">-</span> <span class="variable">y</span><sub>1</sub></div>
+						<div>3. Calculate <span class="variable">steps</span> <span class="operator">=</span> <span class="function">max</span>(|<span class="variable">dx</span>|, |<span class="variable">dy</span>|)</div>
 						<div>
-							4. Calculate x_increment = dx/steps, y_increment = dy/steps
+							4. Calculate <span class="variable">x_increment</span> <span class="operator">=</span> <span class="variable">dx</span>/<span class="variable">steps</span>, <span class="variable">y_increment</span> <span class="operator">=</span> <span class="variable">dy</span>/<span class="variable">steps</span>
 						</div>
-						<div>5. For i = 0 to steps:</div>
-						<div class="indent">Plot(round(x), round(y))</div>
-						<div class="indent">x = x + x_increment</div>
-						<div class="indent">y = y + y_increment</div>
+						<div>5. For <span class="variable">i</span> <span class="operator">=</span> 0 to <span class="variable">steps</span>:</div>
+						<div class="indent"><span class="function">Plot</span>(<span class="function">round</span>(<span class="variable">x</span>), <span class="function">round</span>(<span class="variable">y</span>))</div>
+						<div class="indent"><span class="variable">x</span> <span class="operator">=</span> <span class="variable">x</span> <span class="operator">+</span> <span class="variable">x_increment</span></div>
+						<div class="indent"><span class="variable">y</span> <span class="operator">=</span> <span class="variable">y</span> <span class="operator">+</span> <span class="variable">y_increment</span></div>
 					</div>
 				</div>
 			</div>
@@ -295,14 +295,14 @@
 				description:
 					'Uses incremental calculation to draw lines by calculating intermediate points along the line path using floating-point arithmetic.',
 				code: {
-					'1. Initialize x, y': '',
-					'2. Calculate dx = x2 - x1, dy = y2 - y1': '',
-					'3. Calculate steps = max(|dx|, |dy|)': '',
-					'4. Calculate x_increment = dx/steps, y_increment = dy/steps': '',
-					'5. For i = 0 to steps:': [
-						'Plot(round(x), round(y))',
-						' x = x + x_increment',
-						'y = y + y_increment',
+					'1. Initialize <span class="variable">x</span>, <span class="variable">y</span>': '',
+					'2. Calculate <span class="variable">dx</span> <span class="operator">=</span> <span class="variable">x</span><sub>2</sub> <span class="operator">-</span> <span class="variable">x</span><sub>1</sub>, <span class="variable">dy</span> <span class="operator">=</span> <span class="variable">y</span><sub>2</sub> <span class="operator">-</span> <span class="variable">y</span><sub>1</sub>': '',
+					'3. Calculate <span class="variable">steps</span> <span class="operator">=</span> <span class="function">max</span>(|<span class="variable">dx</span>|, |<span class="variable">dy</span>|)': '',
+					'4. Calculate <span class="variable">x_increment</span> <span class="operator">=</span> <span class="variable">dx</span>/<span class="variable">steps</span>, <span class="variable">y_increment</span> <span class="operator">=</span> <span class="variable">dy</span>/<span class="variable">steps</span>': '',
+					'5. For <span class="variable">i</span> <span class="operator">=</span> 0 to <span class="variable">steps</span>:': [
+						'<span class="function">Plot</span>(<span class="function">round</span>(<span class="variable">x</span>), <span class="function">round</span>(<span class="variable">y</span>))',
+						'<span class="variable">x</span> <span class="operator">=</span> <span class="variable">x</span> <span class="operator">+</span> <span class="variable">x_increment</span>',
+						'<span class="variable">y</span> <span class="operator">=</span> <span class="variable">y</span> <span class="operator">+</span> <span class="variable">y_increment</span>',
 					],
 				},
 			},
@@ -310,16 +310,16 @@
 				description:
 					'An efficient line drawing algorithm that uses only integer arithmetic to determine which pixel is closest to the line path.',
 				code: {
-					'1. Initialize x, y': '',
-					'2. Calculate dx = x2 - x1, dy = y2 - y1': '',
-					'3. Initialize p = 2*dy - dx': '',
-					'4. For x = x1 to x2:': [
-						'Plot(x, y)',
-						'if p >= 0:',
-						'  y = y + 1',
-						'  p = p + 2*(dy - dx)',
+					'1. Initialize <span class="variable">x</span>, <span class="variable">y</span>': '',
+					'2. Calculate <span class="variable">dx</span> <span class="operator">=</span> <span class="variable">x</span><sub>2</sub> <span class="operator">-</span> <span class="variable">x</span><sub>1</sub>, <span class="variable">dy</span> <span class="operator">=</span> <span class="variable">y</span><sub>2</sub> <span class="operator">-</span> <span class="variable">y</span><sub>1</sub>': '',
+					'3. Initialize <span class="variable">p</span> <span class="operator">=</span> 2<span class="operator">*</span><span class="variable">dy</span> <span class="operator">-</span> <span class="variable">dx</span>': '',
+					'4. For <span class="variable">x</span> <span class="operator">=</span> <span class="variable">x</span><sub>1</sub> to <span class="variable">x</span><sub>2</sub>:': [
+						'<span class="function">Plot</span>(<span class="variable">x</span>, <span class="variable">y</span>)',
+						'if <span class="variable">p</span> <span class="operator">>=</span> 0:',
+						'&nbsp;&nbsp;<span class="variable">y</span> <span class="operator">=</span> <span class="variable">y</span> <span class="operator">+</span> 1',
+						'&nbsp;&nbsp;<span class="variable">p</span> <span class="operator">=</span> <span class="variable">p</span> <span class="operator">+</span> 2<span class="operator">*</span>(<span class="variable">dy</span> <span class="operator">-</span> <span class="variable">dx</span>)',
 						'else:',
-						'  p = p + 2*dy',
+						'&nbsp;&nbsp;<span class="variable">p</span> <span class="operator">=</span> <span class="variable">p</span> <span class="operator">+</span> 2<span class="operator">*</span><span class="variable">dy</span>',
 					],
 				},
 			},
@@ -327,16 +327,16 @@
 				description:
 					'Draws a circle using the midpoint decision parameter to determine the closest pixel in each octant, exploiting circle symmetry.',
 				code: {
-					'1. Initialize x = 0, y = r': '',
-					'2. Initialize p = 1 - r': '',
-					'3. While x <= y:': [
-						'Plot all 8 symmetric points of (x, y)',
-						'x = x + 1',
-						'if p < 0:',
-						'  p = p + 2*x + 1',
+					'1. Initialize <span class="variable">x</span> <span class="operator">=</span> 0, <span class="variable">y</span> <span class="operator">=</span> <span class="variable">r</span>': '',
+					'2. Initialize <span class="variable">p</span> <span class="operator">=</span> 1 <span class="operator">-</span> <span class="variable">r</span>': '',
+					'3. While <span class="variable">x</span> <span class="operator"><=</span> <span class="variable">y</span>:': [
+						'<span class="function">Plot</span> all 8 symmetric points of (<span class="variable">x</span>, <span class="variable">y</span>)',
+						'<span class="variable">x</span> <span class="operator">=</span> <span class="variable">x</span> <span class="operator">+</span> 1',
+						'if <span class="variable">p</span> <span class="operator"><</span> 0:',
+						'&nbsp;&nbsp;<span class="variable">p</span> <span class="operator">=</span> <span class="variable">p</span> <span class="operator">+</span> 2<span class="operator">*</span><span class="variable">x</span> <span class="operator">+</span> 1',
 						'else:',
-						'  y = y - 1',
-						'  p = p + 2*(x - y) + 1',
+						'&nbsp;&nbsp;<span class="variable">y</span> <span class="operator">=</span> <span class="variable">y</span> <span class="operator">-</span> 1',
+						'&nbsp;&nbsp;<span class="variable">p</span> <span class="operator">=</span> <span class="variable">p</span> <span class="operator">+</span> 2<span class="operator">*</span>(<span class="variable">x</span> <span class="operator">-</span> <span class="variable">y</span>) <span class="operator">+</span> 1',
 					],
 				},
 			},
@@ -344,26 +344,26 @@
 				description:
 					'Draws an ellipse by dividing it into two regions and using midpoint criteria to decide the closest pixel at each step.',
 				code: {
-					'1. Initialize x = 0, y = ry': '',
-					'2. Calculate initial decision parameter for Region 1': '',
-					'3. While (2*ry^2*x) < (2*rx^2*y):': [
-						'Plot all 4 symmetric points of (x, y)',
-						'x = x + 1',
-						'if p1 < 0:',
-						'  p1 = p1 + 2*ry^2*x + ry^2',
+					'1. Initialize <span class="variable">x</span> <span class="operator">=</span> 0, <span class="variable">y</span> <span class="operator">=</span> <span class="variable">r<sub>y</sub></span>': '',
+					'2. Calculate initial decision parameter for <span class="variable">Region 1</span>': '',
+					'3. While (2<span class="operator">*</span><span class="variable">r<sub>y</sub></span><sup>2</sup><span class="operator">*</span><span class="variable">x</span>) <span class="operator"><</span> (2<span class="operator">*</span><span class="variable">r<sub>x</sub></span><sup>2</sup><span class="operator">*</span><span class="variable">y</span>):': [
+						'<span class="function">Plot</span> all 4 symmetric points of (<span class="variable">x</span>, <span class="variable">y</span>)',
+						'<span class="variable">x</span> <span class="operator">=</span> <span class="variable">x</span> <span class="operator">+</span> 1',
+						'if <span class="variable">p</span><sub>1</sub> <span class="operator"><</span> 0:',
+						'&nbsp;&nbsp;<span class="variable">p</span><sub>1</sub> <span class="operator">=</span> <span class="variable">p</span><sub>1</sub> <span class="operator">+</span> 2<span class="operator">*</span><span class="variable">r<sub>y</sub></span><sup>2</sup><span class="operator">*</span><span class="variable">x</span> <span class="operator">+</span> <span class="variable">r<sub>y</sub></span><sup>2</sup>',
 						'else:',
-						'  y = y - 1',
-						'  p1 = p1 + 2*ry^2*x - 2*rx^2*y + ry^2',
+						'&nbsp;&nbsp;<span class="variable">y</span> <span class="operator">=</span> <span class="variable">y</span> <span class="operator">-</span> 1',
+						'&nbsp;&nbsp;<span class="variable">p</span><sub>1</sub> <span class="operator">=</span> <span class="variable">p</span><sub>1</sub> <span class="operator">+</span> 2<span class="operator">*</span><span class="variable">r<sub>y</sub></span><sup>2</sup><span class="operator">*</span><span class="variable">x</span> <span class="operator">-</span> 2<span class="operator">*</span><span class="variable">r<sub>x</sub></span><sup>2</sup><span class="operator">*</span><span class="variable">y</span> <span class="operator">+</span> <span class="variable">r<sub>y</sub></span><sup>2</sup>',
 					],
-					'4. Calculate initial decision parameter for Region 2': '',
-					'5. While y >= 0:': [
-						'Plot all 4 symmetric points of (x, y)',
-						'y = y - 1',
-						'if p2 > 0:',
-						'  p2 = p2 - 2*rx^2*y + rx^2',
+					'4. Calculate initial decision parameter for <span class="variable">Region 2</span>': '',
+					'5. While <span class="variable">y</span> <span class="operator">>=</span> 0:': [
+						'<span class="function">Plot</span> all 4 symmetric points of (<span class="variable">x</span>, <span class="variable">y</span>)',
+						'<span class="variable">y</span> <span class="operator">=</span> <span class="variable">y</span> <span class="operator">-</span> 1',
+						'if <span class="variable">p</span><sub>2</sub> <span class="operator">></span> 0:',
+						'&nbsp;&nbsp;<span class="variable">p</span><sub>2</sub> <span class="operator">=</span> <span class="variable">p</span><sub>2</sub> <span class="operator">-</span> 2<span class="operator">*</span><span class="variable">r<sub>x</sub></span><sup>2</sup><span class="operator">*</span><span class="variable">y</span> <span class="operator">+</span> <span class="variable">r<sub>x</sub></span><sup>2</sup>',
 						'else:',
-						'  x = x + 1',
-						'  p2 = p2 + 2*ry^2*x - 2*rx^2*y + rx^2',
+						'&nbsp;&nbsp;<span class="variable">x</span> <span class="operator">=</span> <span class="variable">x</span> <span class="operator">+</span> 1',
+						'&nbsp;&nbsp;<span class="variable">p</span><sub>2</sub> <span class="operator">=</span> <span class="variable">p</span><sub>2</sub> <span class="operator">+</span> 2<span class="operator">*</span><span class="variable">r<sub>y</sub></span><sup>2</sup><span class="operator">*</span><span class="variable">x</span> <span class="operator">-</span> 2<span class="operator">*</span><span class="variable">r<sub>x</sub></span><sup>2</sup><span class="operator">*</span><span class="variable">y</span> <span class="operator">+</span> <span class="variable">r<sub>x</sub></span><sup>2</sup>',
 					],
 				},
 			},
@@ -399,19 +399,19 @@
 			pseudo_code.innerHTML = '';
 			for (const [step, value] of Object.entries(data.code)) {
 				const stepElement = document.createElement('div');
-				stepElement.textContent = step;
+				stepElement.innerHTML = step;
 				pseudo_code.appendChild(stepElement);
 
 				if (Array.isArray(value)) {
 					value.forEach((line) => {
 						const lineElement = document.createElement('div');
 						lineElement.className = 'indent';
-						lineElement.textContent = line;
+						lineElement.innerHTML = line;
 						pseudo_code.appendChild(lineElement);
 					});
 				} else if (value) {
 					const lineElement = document.createElement('div');
-					lineElement.textContent = value;
+					lineElement.innerHTML = value;
 					pseudo_code.appendChild(lineElement);
 				}
 			}

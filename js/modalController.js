@@ -19,7 +19,7 @@ export function initModal() {
 	openModalBtn = document.getElementById("openModal")
 	closeModalBtn = document.getElementById("closeModal")
 
-	openModalBtn.addEventListener("click", openModal)
+	openModalBtn.addEventListener("click", toggleModal)
 	closeModalBtn.addEventListener("click", closeModal)
 
 	modalContent.addEventListener("mousedown", handleMouseDown)
@@ -39,6 +39,14 @@ export function showFloatingButton() {
 export function hideFloatingButton() {
 	if (openModalBtn) {
 		openModalBtn.style.display = "none"
+	}
+}
+
+export function toggleModal() {
+	if (isModalOpen) {
+		closeModal()
+	} else {
+		openModal()
 	}
 }
 
@@ -70,22 +78,22 @@ function positionModalAtBottom() {
 
 function handleMouseDown(e) {
 	// Check if we're clicking on a resize handle
-	if (e.target.classList.contains('resize-handle')) {
+	if (e.target.classList.contains("resize-handle")) {
 		isResizing = true
 		resizeDirection = e.target.classList[1] // get the direction class (resize-n, resize-s, etc.)
 		startX = e.clientX
 		startY = e.clientY
-		
+
 		const rect = modalContent.getBoundingClientRect()
 		initialX = rect.left
 		initialY = rect.top
 		initialWidth = rect.width
 		initialHeight = rect.height
-		
+
 		e.preventDefault()
 		return
 	}
-	
+
 	// Original drag functionality
 	if (e.target.closest(".modal-header") || e.target.closest(".modal-title")) {
 		isDragging = true
@@ -110,7 +118,7 @@ function handleMouseMove(e) {
 		handleResize(e)
 		return
 	}
-	
+
 	if (!isDragging) return
 
 	e.preventDefault()
@@ -142,82 +150,82 @@ export function isModalVisible() {
 }
 
 function initResizeHandles() {
-	const resizeHandles = modalContent.querySelectorAll('.resize-handle')
-	resizeHandles.forEach(handle => {
-		handle.addEventListener('mousedown', handleMouseDown)
+	const resizeHandles = modalContent.querySelectorAll(".resize-handle")
+	resizeHandles.forEach((handle) => {
+		handle.addEventListener("mousedown", handleMouseDown)
 	})
 }
 
 function handleResize(e) {
 	e.preventDefault()
-	
+
 	const deltaX = e.clientX - startX
 	const deltaY = e.clientY - startY
-	
+
 	let newWidth = initialWidth
 	let newHeight = initialHeight
 	let newX = initialX
 	let newY = initialY
-	
+
 	switch (resizeDirection) {
-		case 'resize-n':
+		case "resize-n":
 			newHeight = initialHeight - deltaY
 			newY = initialY + deltaY
 			break
-		case 'resize-s':
+		case "resize-s":
 			newHeight = initialHeight + deltaY
 			break
-		case 'resize-e':
+		case "resize-e":
 			newWidth = initialWidth + deltaX
 			break
-		case 'resize-w':
+		case "resize-w":
 			newWidth = initialWidth - deltaX
 			newX = initialX + deltaX
 			break
-		case 'resize-ne':
+		case "resize-ne":
 			newWidth = initialWidth + deltaX
 			newHeight = initialHeight - deltaY
 			newY = initialY + deltaY
 			break
-		case 'resize-nw':
+		case "resize-nw":
 			newWidth = initialWidth - deltaX
 			newHeight = initialHeight - deltaY
 			newX = initialX + deltaX
 			newY = initialY + deltaY
 			break
-		case 'resize-se':
+		case "resize-se":
 			newWidth = initialWidth + deltaX
 			newHeight = initialHeight + deltaY
 			break
-		case 'resize-sw':
+		case "resize-sw":
 			newWidth = initialWidth - deltaX
 			newHeight = initialHeight + deltaY
 			newX = initialX + deltaX
 			break
 	}
-	
+
 	// Apply minimum and maximum constraints
 	const minWidth = 300
 	const minHeight = 200
 	const maxWidth = window.innerWidth * 0.9
 	const maxHeight = window.innerHeight * 0.8
-	
+
 	newWidth = Math.max(minWidth, Math.min(newWidth, maxWidth))
 	newHeight = Math.max(minHeight, Math.min(newHeight, maxHeight))
-	
+
 	// Adjust position if we hit size limits
-	if (newWidth === minWidth && (resizeDirection.includes('w'))) {
+	if (newWidth === minWidth && resizeDirection.includes("w")) {
 		newX = initialX + initialWidth - minWidth
 	}
-	if (newHeight === minHeight && (resizeDirection.includes('n'))) {
+	if (newHeight === minHeight && resizeDirection.includes("n")) {
 		newY = initialY + initialHeight - minHeight
 	}
-	
+
 	// Apply the new dimensions and position
-	modalContent.style.width = newWidth + 'px'
-	modalContent.style.height = newHeight + 'px'
-	modalContent.style.left = newX + 'px'
-	modalContent.style.top = newY + 'px'
-	modalContent.style.position = 'fixed'
-	modalContent.style.transform = 'none'
+	modalContent.style.width = newWidth + "px"
+	modalContent.style.height = newHeight + "px"
+	modalContent.style.left = newX + "px"
+	modalContent.style.top = newY + "px"
+	modalContent.style.position = "fixed"
+	modalContent.style.transform = "none"
 }

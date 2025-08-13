@@ -299,6 +299,28 @@ canvas:hover {
 .pseudocode div {
 	margin-bottom: 0.25rem;
 }
+.pseudocode sub {
+	font-size: 0.7em;
+	vertical-align: sub;
+	color: #4b5563;
+}
+.pseudocode sup {
+	font-size: 0.7em;
+	vertical-align: super;
+	color: #4b5563;
+}
+.pseudocode .variable {
+	color: #059669;
+	font-weight: 500;
+}
+.pseudocode .operator {
+	color: #dc2626;
+	font-weight: 500;
+}
+.pseudocode .function {
+	color: #7c3aed;
+	font-weight: 500;
+}
 .indent {
 	margin-left: 1rem;
 }
