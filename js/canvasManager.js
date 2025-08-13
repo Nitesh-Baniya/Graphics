@@ -1,14 +1,50 @@
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 
-canvas.width = canvas.offsetWidth
-canvas.height = canvas.offsetHeight
-
 let pixelSize = 40
 const marginLeft = 40
 const marginTop = 40
-let cols = Math.floor((canvas.width - marginLeft) / pixelSize)
-let rows = Math.floor((canvas.height - marginTop) / pixelSize)
+let cols, rows
+
+// Function to resize canvas based on container
+function resizeCanvas() {
+	// Get the computed dimensions from CSS
+	const rect = canvas.getBoundingClientRect()
+	const width = rect.width || 800
+	const height = rect.height || 600
+	
+	// Set canvas internal dimensions
+	canvas.width = width
+	canvas.height = height
+	
+	// Recalculate grid dimensions
+	cols = Math.floor((width - marginLeft) / pixelSize)
+	rows = Math.floor((height - marginTop) / pixelSize)
+}
+
+// Initialize canvas dimensions
+function initCanvas() {
+	resizeCanvas()
+	// Initial grid draw
+	if (cols && rows) {
+		drawGrid()
+	}
+}
+
+// Wait for DOM to be fully loaded
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', initCanvas)
+} else {
+	initCanvas()
+}
+
+// Add resize event listener
+window.addEventListener('resize', () => {
+	setTimeout(() => {
+		resizeCanvas()
+		drawGrid()
+	}, 100) // Small delay to ensure layout is complete
+})
 
 let cellIncrease = document.getElementById("cellIncrease")
 let cellDecrease = document.getElementById("cellDecrease")
