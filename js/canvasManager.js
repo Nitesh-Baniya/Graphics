@@ -1,76 +1,175 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("canvas")
+const ctx = canvas.getContext("2d")
 
-const pixelSize = 20;
-const marginLeft = 40;
-const marginTop = 40;
-const cols = Math.floor((canvas.width - marginLeft) / pixelSize);
-const rows = Math.floor((canvas.height - marginTop) / pixelSize);
+let pixelSize = 40
+const marginLeft = 40
+const marginTop = 40
+let cols, rows
 
-let zoom = 1;
-let panX = 0;
-let panY = 0;
+// Callback to redraw content after resize
+let onResizeCallback = null
+
+// Function to resize canvas based on container
+function resizeCanvas() {
+	// Get the computed dimensions from CSS
+	const rect = canvas.getBoundingClientRect()
+	const width = rect.width || 800
+	const height = rect.height || 600
+
+	// Set canvas internal dimensions
+	canvas.width = width
+	canvas.height = height
+
+	// Recalculate grid dimensions
+	cols = Math.floor((width - marginLeft) / pixelSize)
+	rows = Math.floor((height - marginTop) / pixelSize)
+}
+
+// Initialize canvas dimensions
+function initCanvas() {
+	resizeCanvas()
+	// Initial grid draw
+	if (cols && rows) {
+		drawGrid()
+	}
+}
+
+// Wait for DOM to be fully loaded
+if (document.readyState === "loading") {
+	document.addEventListener("DOMContentLoaded", initCanvas)
+} else {
+	initCanvas()
+}
+
+// Add resize event listener
+window.addEventListener("resize", () => {
+	setTimeout(() => {
+		resizeCanvas()
+		drawGrid()
+		// Call the resize callback to redraw content if available
+		if (onResizeCallback) {
+			onResizeCallback()
+		}
+	}, 100) // Small delay to ensure layout is complete
+})
+
+// Function to set resize callback for redrawing content
+export function setOnResizeCallback(callback) {
+	onResizeCallback = callback
+}
+
+let cellIncrease = document.getElementById("cellIncrease")
+let cellDecrease = document.getElementById("cellDecrease")
+let cellSize = document.getElementById("cellSize")
+
+let onCellSizeChangeCallback = null
+
+cellIncrease.addEventListener("click", () => {
+	let size = parseInt(cellSize.textContent)
+	cellSize.textContent = size + 2
+	pixelSize = size + 2
+	setCellSize(pixelSize)
+})
+
+cellDecrease.addEventListener("click", () => {
+	let size = parseInt(cellSize.textContent)
+	if (size > 2) {
+		cellSize.textContent = size - 2
+	}
+	pixelSize = size - 2
+	setCellSize(pixelSize)
+})
+
+export function getCellSize() {
+	return pixelSize
+}
+
+export function setCellSize(size) {
+	pixelSize = size
+	cols = Math.floor((canvas.width - marginLeft) / pixelSize)
+	rows = Math.floor((canvas.height - marginTop) / pixelSize)
+	drawGrid()
+
+	if (onCellSizeChangeCallback) {
+		onCellSizeChangeCallback()
+	}
+}
+
+export function setOnCellSizeChangeCallback(callback) {
+	onCellSizeChangeCallback = callback
+}
 
 export function getGridSize() {
-    return { cols, rows };
+	return { cols, rows }
 }
 
 export function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
 export function drawGrid() {
-    clearCanvas();
+	clearCanvas()
 
-    // Draw gray pixel background
-    for (let c = 0; c < cols; c++) {
-        for (let r = 0; r < rows; r++) {
-            ctx.fillStyle = '#eee';
-            ctx.fillRect(marginLeft + c * pixelSize, marginTop + r * pixelSize, pixelSize, pixelSize);
-        }
-    }
+	for (let c = 0; c < cols; c++) {
+		for (let r = 0; r < rows; r++) {
+			ctx.fillStyle = "#eee"
+			ctx.fillRect(
+				marginLeft + c * pixelSize,
+				marginTop + r * pixelSize,
+				pixelSize,
+				pixelSize
+			)
+		}
+	}
 
-    ctx.strokeStyle = '#ccc';
-    // vertical lines
-    for (let c = 0; c <= cols; c++) {
-        const x = marginLeft + c * pixelSize;
-        ctx.beginPath();
-        ctx.moveTo(x, marginTop);
-        ctx.lineTo(x, marginTop + rows * pixelSize);
-        ctx.stroke();
-    }
-    // horizontal lines
-    for (let r = 0; r <= rows; r++) {
-        const y = marginTop + r * pixelSize;
-        ctx.beginPath();
-        ctx.moveTo(marginLeft, y);
-        ctx.lineTo(marginLeft + cols * pixelSize, y);
-        ctx.stroke();
-    }
+	ctx.strokeStyle = "#ccc"
+	for (let c = 0; c <= cols; c++) {
+		const x = marginLeft + c * pixelSize
+		ctx.beginPath()
+		ctx.moveTo(x, marginTop)
+		ctx.lineTo(x, marginTop + rows * pixelSize)
+		ctx.stroke()
+	}
+	for (let r = 0; r <= rows; r++) {
+		const y = marginTop + r * pixelSize
+		ctx.beginPath()
+		ctx.moveTo(marginLeft, y)
+		ctx.lineTo(marginLeft + cols * pixelSize, y)
+		ctx.stroke()
+	}
 
-    // Axis coordinates
-    ctx.fillStyle = 'black';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.font = '12px Arial';
+	ctx.fillStyle = "black"
+	ctx.textAlign = "center"
+	ctx.textBaseline = "middle"
+	ctx.font = "12px Arial"
 
-    for (let c = 0; c < cols; c++) {
-        ctx.fillText(c, marginLeft + c * pixelSize + pixelSize / 2, marginTop / 2);
-    }
+	for (let c = 0; c < cols; c++) {
+		ctx.fillText(c, marginLeft + c * pixelSize + pixelSize / 2, marginTop / 2)
+	}
 
-    ctx.textAlign = 'right';
-    for (let r = 0; r < rows; r++) {
-        ctx.fillText(r, marginLeft / 2, marginTop + r * pixelSize + pixelSize / 2);
-    }
+	ctx.textAlign = "center"
+	for (let r = 0; r < rows; r++) {
+		ctx.fillText(r, marginLeft / 2, marginTop + r * pixelSize + pixelSize / 2)
+	}
 }
 
 export function drawPixel(x, y, color) {
-    ctx.fillStyle = color;
-    ctx.fillRect(marginLeft + x * pixelSize, marginTop + y * pixelSize, pixelSize, pixelSize);
-    ctx.strokeStyle = '#666';
-    ctx.strokeRect(marginLeft + x * pixelSize, marginTop + y * pixelSize, pixelSize, pixelSize);
+	ctx.fillStyle = color
+	ctx.fillRect(
+		marginLeft + x * pixelSize,
+		marginTop + y * pixelSize,
+		pixelSize,
+		pixelSize
+	)
+	ctx.strokeStyle = "#666"
+	ctx.strokeRect(
+		marginLeft + x * pixelSize,
+		marginTop + y * pixelSize,
+		pixelSize,
+		pixelSize
+	)
 }
 
 export function getCanvas() {
-    return canvas;
+	return canvas
 }
